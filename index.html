@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  
+  <title>Frontend Mentor | QR code component</title>
+
+  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+  <style>
+    /* General */
+    :root {
+      --primary: #d5e1ef;
+      --blue: #2b7dfa;
+      --blueDark: #00132f;
+      --white: #ffffff;
+      --grey: #6b6b6b;
+      --lightGrey: #bfbfbf;
+      --black: #000000;
+    }
+
+    *,*::after,*::before {box-sizing: border-box;}
+    body,html {padding: 0; outline: none; margin: 0; font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif}
+    body {width: 100%; height: 100vh; background-color: var(--primary); cursor: none;}
+
+    /* QR section */
+    .qr_container {width: 290px; height: auto; padding: 15px; background-color: var(--white); border-radius: 20px; position: absolute;
+                   left: 50%; top: 50%; transform: translate(-50%, -50%); box-shadow: 0px 0px 15px var(--lightGrey);}
+    .qr_image {overflow: hidden; border-radius: 10px;}
+    .qr_image img {display: block; width: 100%;}
+    .qr_info {padding: 15px;}
+    .qr_info h1 {font-size: 18px; font-weight: 600; margin-top: 0px; text-align: center; line-height: 23px; color: var(--blueDark);}
+    .qr_info p {font-size: 14px; font-weight: normal; text-align: center; color: var(--grey);}
+
+    .attribution {position: relative; bottom: 0px; top: 95%; font-size: 11px; text-align: center; }
+    .attribution a { color: var(--blueDark); }
+
+    /* cursor */
+    .cursor {pointer-events: none; cursor:none;} 
+    .cursor .cursor__ball { position: fixed; top: 0; left: 0; mix-blend-mode: difference; z-index: 1000; transition: all 70ms ease;}
+    .cursor .cursor__ball:nth-child(2) { transition: all 30ms ease;}
+    .cursor .cursor__ball circle { fill: #f7f8fa;}
+  </style>
+</head>
+<body>
+
+
+  <div class="cursor">
+    <div class="cursor__ball cursor__ball--big ">
+      <svg height="30" width="30">
+        <circle cx="15" cy="15" r="12" stroke-width="0"></circle>
+      </svg>
+    </div>
+    
+    <div class="cursor__ball cursor__ball--small">
+      <svg height="10" width="10">
+        <circle cx="5" cy="5" r="4" stroke-width="0"></circle>
+      </svg>
+    </div>
+  </div>
+
+
+  <section class="qr_container hoverable">
+    <div class="qr_image">
+      <img src='./images/image-qr-code.png' alt="qr_scan_image">
+    </div>
+    <div class="qr_info">
+      <h1>Improve your front-end skills by building projects</h1>
+      <p>Scan the QR code to visit Frondend Mentor and take your coding skills to the next level</p>
+    </div>
+  </section>
+
+
+  
+  <footer class="attribution">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
+    Coded by <a href="#">Kareem Mahmoud</a>.
+  </footer>
+
+
+  <script>
+    const $bigBall = document.querySelector('.cursor__ball--big');
+    const $smallBall = document.querySelector('.cursor__ball--small');
+    const $hoverables = document.querySelector('.hoverable');
+    const $cursorBall = document.querySelectorAll('.cursor__ball');
+
+    function MouseMove(e) {
+      for(let i = 0; i <= $cursorBall.length; i++) {
+        $cursorBall[0].style.left = e.pageX + 'px';
+        $cursorBall[0].style.top = e.pageY + 'px';
+        $cursorBall[1].style.left = e.pageX + 10 + 'px';
+        $cursorBall[1].style.top = e.pageY + 3 + 'px';
+      }
+    }
+
+    // Hover an element
+    function MouseHover() {
+      return $bigBall.style.transform = 'scale(5)';
+    }
+    function MouseHoverOut() {
+      return $bigBall.style.transform = 'scale(1)';
+    }
+
+
+    // Listeners
+    document.body.addEventListener('mousemove', MouseMove, false);
+    $hoverables.addEventListener('mouseenter', MouseHover);
+    $hoverables.addEventListener('mouseleave', MouseHoverOut);
+  </script>
+</body>
+</html>
